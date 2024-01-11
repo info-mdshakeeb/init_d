@@ -54,10 +54,10 @@ const TopNav = () => {
                     <ul className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                       <li>
                         <Logout>
-                          <button className="text-[16px] font-medium font-manrope flex items-center gap-2">
+                          <span className="text-[16px] font-medium font-manrope flex items-center gap-2">
                             <FiArrowLeftCircle size={16} className="text-gray-600" />
                             Sign out
-                          </button>
+                          </span>
                         </Logout>
                       </li>
                     </ul>
