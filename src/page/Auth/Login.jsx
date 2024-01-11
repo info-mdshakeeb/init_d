@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import rememberMe from "../../lib/rememberMe";
@@ -19,7 +19,15 @@ const Login = () => {
   const [login, { isError, isLoading, isSuccess, error }] = useLoginMutation()
   if (rememberMeValue) { setUserDetails("authInfo", LoginInfo) } else { removeUserDetails("authInfo") }
 
-  function LoginFun() { login({ "user_name": LoginInfo.email, "password": LoginInfo.password }) }
+  function LoginFun(e) {
+    e.preventDefault()
+    if (LoginInfo.email === "" || LoginInfo.password === "") {
+      toast.error("Please fill all the field", { position: 'top-right', })
+      return
+    }
+
+    login({ "user_name": LoginInfo.email, "password": LoginInfo.password })
+  }
   useEffect(() => {
     isError ?
       (toast.error(error.data.error, { position: 'top-right', }))
@@ -33,7 +41,7 @@ const Login = () => {
     setTimeout(() => { navigate(from ? from : "/", { replace: true }) }, 100);
   }
   return (
-    <Fragment>
+    <form onSubmit={LoginFun}>
       <div className="flex items-center justify-center w-full min-h-screen py-5 bg-gray-300 ">
         <div className="mx-auto w-full  rounded-t-xl  md:max-w-[600px]  px-4">
           <div className="login_banner rounded-t-lg pt-[4.875rem] pb-[4.938rem] bg-primary ">
@@ -96,35 +104,18 @@ const Login = () => {
               </div>
               <div>
                 {LoginInfo.email === "" || LoginInfo.password === "" ? (
-                  <button
-                    disabled
-                    className=" inter-600 w-full bg-gray-300 p-2.5 text-base font-bold leading-[1.3rem] tracking-[2%] text-[#222202]">
-                    Login Disabled
-                  </button>
-                ) : (
-                  <button
-                    disabled={isLoading}
-                    onClick={() => LoginFun()}
+                  <button disabled
+                    className=" inter-600 w-full bg-gray-300 p-2.5 text-base font-bold leading-[1.3rem] tracking-[2%] text-[#222202]"> Login Disabled
+                  </button>) :
+                  (<button type="submit" disabled={isLoading}
                     className={` w-full h-10 flex items-center justify-center  p-2.5 text-base font-bold leading-[1.3rem] t text-[#222222] ${isLoading ? " bg-gray-400 " : "bg-gray-300"}`}>
-                    {isLoading ? <span className="loading loading-bars loading-sm"></span> : "Login"}
-                  </button>
-                )}
+                    {isLoading ? <span className="">Loading..</span> : "Login"} </button>)}
               </div>
-              {/* <div>
-                <p className="text-center font-poppins text-base leading-[1.3rem] text-white">
-                  New User?{" "}
-                  <Link
-                    className="font-poppins text-base leading-[1.3rem] text-white hover:text-blue-500 hover:underline hover:underline-offset-2"
-                    to="/registration">
-                    Register Now
-                  </Link>
-                </p>
-              </div> */}
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </form>
   );
 };
 

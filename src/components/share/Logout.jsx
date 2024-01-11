@@ -16,7 +16,7 @@ export const Logout = ({ children, className }) => {
       confirmButtonText: `Logout`
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('auth')
+        localStorage.removeItem('adminAuth')
         dispatch(userLogout(undefined))
         Swal.fire({
           icon: 'success',
