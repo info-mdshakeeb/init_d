@@ -1,8 +1,8 @@
-import App from "../App";
 import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import GlobalLoader from "../components/share/loading/GlobalLoader";
 
+const App = lazy(() => import("../App"));
 const Home = lazy(() => import("../page/Home.jsx"));
 const Login = lazy(() => import("../page/Auth/Login.jsx"));
 const PublicRoute = lazy(() => import("./PublicRoute.jsx"));

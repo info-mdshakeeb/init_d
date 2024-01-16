@@ -36,15 +36,11 @@ const TopNav = () => {
     <nav
       className={`flex h-16 items-center justify-end bg-primary shadow lg:h-24 lg:items-stretch lg:justify-between w-full px-4`}>
       <div className="items-center hidden w-full px-4 lg:flex ">
-        <Search text={"Search here"} />
+        <Search placeholder={"Search here"} />
         <div className="justify-end hidden w-full max-w-xs gap-4 lg:flex">
           <div className="flex items-center justify-between gap-4 max-h-[50px]">
 
             <div className="flex items-center justify-center">
-              <div className="pr-4 text-white">
-                icon
-                {/* <img src={menImg} className="w-12 h-12 rounded-full object-cover mr-[16px]" alt="" /> */}
-              </div>
               <div ref={dropdownRef} className="relative inline-block text-right">
                 <div className="text-white">
                   <span onClick={toggleDropdown} type="button" className="text-lg font-semibold cursor-pointer font-inter">Admin</span>
